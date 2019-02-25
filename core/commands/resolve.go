@@ -13,9 +13,9 @@ import (
 
 	path "gx/ipfs/QmQAgv6Gaoe2tQpcabqwKXKChp2MZ7i3UXv9DqTTaxCaTR/go-path"
 	cmds "gx/ipfs/QmQkW9fnCsg9SLHdViiAh6qfBppodsPZVpU92dZLqYtEfs/go-ipfs-cmds"
-	coreiface "gx/ipfs/QmXLwxifxwfc2bAwq6rdjbYqAsGzWsDE9RM5TWMGtykyj6/interface-go-ipfs-core"
-	options "gx/ipfs/QmXLwxifxwfc2bAwq6rdjbYqAsGzWsDE9RM5TWMGtykyj6/interface-go-ipfs-core/options"
-	nsopts "gx/ipfs/QmXLwxifxwfc2bAwq6rdjbYqAsGzWsDE9RM5TWMGtykyj6/interface-go-ipfs-core/options/namesys"
+	coreiface "gx/ipfs/QmSU6tTh2ng2WnqfaxPggpCvc5qYBWeGgJiQzEWQhotNhi/interface-go-ipfs-core"
+	options "gx/ipfs/QmSU6tTh2ng2WnqfaxPggpCvc5qYBWeGgJiQzEWQhotNhi/interface-go-ipfs-core/options"
+	nsopts "gx/ipfs/QmSU6tTh2ng2WnqfaxPggpCvc5qYBWeGgJiQzEWQhotNhi/interface-go-ipfs-core/options/namesys"
 	cmdkit "gx/ipfs/Qmde5VP1qUkyQXKCfmEUA7bP64V2HAptbJ7phuPp7jXWwg/go-ipfs-cmdkit"
 	cidenc "gx/ipfs/Qmf3gRH2L1QZy92gJHJEwKmBJKJGVf8RpN2kPPD2NQWg8G/go-cidutil/cidenc"
 )
