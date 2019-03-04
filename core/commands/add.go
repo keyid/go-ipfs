@@ -9,6 +9,7 @@ import (
 
 	"github.com/ipfs/go-ipfs/core/commands/cmdenv"
 
+	files "gx/ipfs/QmXWZCd8jfaHmt4UDSnjKmGcrQMw95bDGWqEeVLVJjoANX/go-ipfs-files"
 	cmds "gx/ipfs/QmQkW9fnCsg9SLHdViiAh6qfBppodsPZVpU92dZLqYtEfs/go-ipfs-cmds"
 	coreiface "gx/ipfs/QmSU6tTh2ng2WnqfaxPggpCvc5qYBWeGgJiQzEWQhotNhi/interface-go-ipfs-core"
 	options "gx/ipfs/QmSU6tTh2ng2WnqfaxPggpCvc5qYBWeGgJiQzEWQhotNhi/interface-go-ipfs-core/options"
@@ -185,6 +186,22 @@ You can now check what blocks have been created by:
 
 		events := make(chan interface{}, adderOutChanSize)
 
+		var toadd files.Node = req.Files
+		addName := ""
+		if !wrap {
+			it := req.Files.Entries()
+			if !it.Next() {
+				err := it.Err()
+				if err == nil {
+					return fmt.Errorf("expected a file argument")
+				}
+				return err
+			}
+
+			addName = it.Name()
+			toadd = it.Node()
+		}
+
 		opts := []options.UnixfsAddOption{
 			options.Unixfs.Hash(hashFunCode),
 
@@ -198,13 +215,13 @@ You can now check what blocks have been created by:
 			options.Unixfs.FsCache(fscache),
 			options.Unixfs.Nocopy(nocopy),
 
-			options.Unixfs.Wrap(wrap),
 			options.Unixfs.Hidden(hidden),
 			options.Unixfs.StdinName(pathName),
 
 			options.Unixfs.Progress(progress),
 			options.Unixfs.Silent(silent),
 			options.Unixfs.Events(events),
+			options.Unixfs.BaseName(addName),
 		}
 
 		if cidVerSet {
@@ -224,7 +241,7 @@ You can now check what blocks have been created by:
 			var err error
 			defer func() { errCh <- err }()
 			defer close(events)
-			_, err = api.Unixfs().Add(req.Context, req.Files, opts...)
+			_, err = api.Unixfs().Add(req.Context, toadd, opts...)
 		}()
 
 		for event := range events {
